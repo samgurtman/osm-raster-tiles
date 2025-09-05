@@ -16,14 +16,14 @@ def deg2num(lat_deg, lon_deg, zoom):
   
       
 def render(tuple):
-  tile_size, zoom, x, y = tuple
-  file_loc=f"tiles-{tile_size}/{zoom}/{x}/{y}.png"
+  output_dir, tile_size, zoom, x, y = tuple
+  file_loc=f"{output_dir}/{zoom}/{x}/{y}.png"
   if os.path.isfile(file_loc):
     return
    
-  os.makedirs(f"tiles-{tile_size}/{zoom}/{x}", exist_ok=True)
+  os.makedirs(f"{output_dir}/{zoom}/{x}", exist_ok=True)
   url=f"http://localhost:8080/styles/foreflight/{tile_size}/{zoom}/{x}/{y}.png"
-  temp = tempfile.NamedTemporaryFile(delete=False)
+  temp = tempfile.NamedTemporaryFile(delete=False, dir="data/temp")
   urllib.request.urlretrieve(url, temp.name)
   os.replace(temp.name, file_loc)
   return
@@ -33,7 +33,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Download raster tiles')
     parser.add_argument('-w', '--workers', type=int, default=8, help='number of worker processes')
     parser.add_argument('-s', '--tile-size', type=int, default=256, help='tile size in pixels')
+    parser.add_argument('-o', '--output-dir', type=str, default="tiles", help='output dir')
+    parser.add_argument('-t', '--temp-dir', type=str, default="temp-tiles", help='temp dir')
+
+
     args = parser.parse_args()
+
+    os.makedirs(args.temp_dir, exist_ok=true)
 
     tiles = []
     for zoom in range(0,16):
@@ -41,7 +47,7 @@ if __name__ == '__main__':
       end_x, end_y = deg2num(24, -66, zoom)
       for x in range(start_x, end_x + 1):
         for y in range(start_y, end_y + 1):
-          tiles.append((args.tile_size, zoom, x, y))
+          tiles.append((args.output_dir, args.tile_size, zoom, x, y))
 
     with Pool(args.workers) as p:
         for result in tqdm.tqdm(p.imap_unordered(render, tiles, 200), total = len(tiles)):
