@@ -1,0 +1,6 @@
+[submodule "font-glyphs"]
+	path = font-glyphs
+	url = https://github.com/orangemug/font-glyphs.git
+[submodule "osm-liberty"]
+	path = osm-liberty
+	url = https://github.com/maputnik/osm-liberty.git
