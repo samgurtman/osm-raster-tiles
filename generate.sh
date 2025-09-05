@@ -4,7 +4,6 @@ sudo yum install -y curl java-21-amazon-corretto python3 git
 curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
 sudo yum install -y nodejs
 
-git clone https://github.com/samgurtman/osm-raster-tiles.git /opt/osm-raster-tiles
 cd /opt/osm-raster-tiles
 
 mkdir data
