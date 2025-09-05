@@ -1,0 +1,20 @@
+{
+  "options": {
+    "paths": {
+      "root": ""
+    },
+    "maxScaleFactor": 3,
+    "maxSize": 2048,
+    "serveAllFonts": false,
+    "serveAllStyles": false,
+    "serveStaticMaps": true,
+    "allowRemoteMarkerIcons": true,
+    "allowInlineMarkerImages": true
+  },
+  "styles": {
+    "foreflight": {
+      "style": "style.json",
+      "serve_rendered": true
+    }
+  }
+}
