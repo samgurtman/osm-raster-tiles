@@ -3,7 +3,7 @@
     "paths": {
       "root": ""
     },
-    "maxScaleFactor": 3,
+    "maxScaleFactor": 1,
     "maxSize": 2048,
     "serveAllFonts": false,
     "serveAllStyles": false,
